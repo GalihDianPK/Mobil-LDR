@@ -1,26 +1,32 @@
-🚗 LDR Light Following Car using Arduino + AVR Assembly
+# Proyek Mobil LDR (Hybrid C & Assembly)
 
-Mobil robot sederhana berbasis Arduino Uno yang menggunakan 2 sensor LDR untuk mendeteksi cahaya dan menggerakkan motor DC menggunakan driver L298N.
-Project ini menggabungkan pemrograman C/C++ dan AVR Assembly untuk membaca sensor secara low-level.
+Proyek ini adalah sistem kendali robot mobil berbasis Arduino yang menggunakan pendekatan *Hybrid Programming*. Sistem ini menggabungkan efisiensi **AVR Assembly** untuk pembacaan sensor *low-level* dengan kemudahan **C++** untuk logika sistem utama.
 
-📸 Preview Project
-✨ Features
-Menggunakan 2 sensor LDR
-Kontrol motor DC dengan driver L298N
-Pembacaan sensor menggunakan AVR Assembly
-Debounce sensor agar pembacaan stabil
-Robot bergerak mengikuti arah cahaya
-🛠 Components Used
-Arduino Uno
-L298N Motor Driver
-2x LDR Sensor Module
-Chassis Robot Car
-2x DC Motor + Wheel
-Battery / Power Supply
-Jumper Wires
-⚙️ How It Works
-Sensor kiri mendeteksi cahaya → mobil bergerak ke satu arah
-Sensor kanan mendeteksi cahaya → mobil bergerak ke arah sebaliknya
-Jika tidak ada cahaya terdeteksi → motor berhenti
+## 📋 Fitur Utama
+* **Optimasi Assembly:** Pembacaan pin sensor dilakukan langsung pada register `PINB` menggunakan bahasa Assembly AVR untuk akses yang lebih presisi.
+* **Sistem Debouncing:** Algoritma *software debouncing* untuk meminimalisir *noise* pada sensor LDR.
+* **Kendali Motor:** Logika kontrol motor yang responsif berdasarkan input sensor.
 
-Assembly digunakan untuk membaca pin digital secara langsung dari register AVR (PINB) agar lebih cepat dan low-level.
+## 🔌 Konfigurasi Pin
+| Komponen | Pin Arduino |
+| :--- | :--- |
+| **LDR 1** | PB1 (Pin 9) |
+| **LDR 2** | PB2 (Pin 10) |
+| **Motor IN1** | Pin 7 |
+| **Motor IN2** | Pin 5 |
+| **Motor IN3** | Pin 6 |
+| **Motor IN4** | Pin 8 |
+
+## 🛠️ Struktur Kode
+* **`main.ino`**: Mengatur logika utama, inisialisasi pin, dan sistem *debouncing*.
+* **`sensor.S`**: Berisi fungsi Assembly (`LDR_DigitalRead` & `LDR2_DigitalRead`) untuk membaca status logika sensor langsung dari hardware.
+
+## 🚀 Cara Penggunaan
+1. Pastikan Arduino IDE telah terpasang.
+2. Tempatkan file kode C (`.ino`) dan file Assembly (`.S`) dalam satu folder yang sama.
+3. Hubungkan Arduino ke komputer.
+4. Unggah (Upload) kode ke board Arduino Anda.
+5. Pastikan skema kabel sesuai dengan tabel konfigurasi pin di atas.
+
+## 📝 Lisensi
+Proyek ini bersifat *open-source*. Silakan digunakan untuk tujuan edukasi atau pengembangan lebih lanjut.
